@@ -16,6 +16,13 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/assets/style/main.scss";',
+      },
+    },
+  },
   server: {
     https: false, // 是否开启 https
     open: false, // 是否自动在浏览器打开

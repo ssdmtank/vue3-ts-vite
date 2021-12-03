@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
-const a = `template1223`
-</script>
-
 <template>
   <h1>{{ msg }}</h1>
 
@@ -29,9 +20,34 @@ const a = `template1223`
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
+    <button @click="handleClick">action修改</button>
+    <button @click="handleClick2">patch修改</button>
   </p>
+  <div>{{ loginStore.name }}</div>
+  <div>{{ loginStore.nameLength }}</div>
 </template>
+<script setup lang="ts">
+import { useLoginStore } from '@/store/modules/login'
+import { ref } from 'vue'
 
+defineProps<{ msg: string }>()
+
+const count = ref(0)
+const a = `template1223`
+
+const loginStore = useLoginStore()
+console.log('mainStore', loginStore.name)
+
+const handleClick = () => {
+  loginStore.setName('qweqw')
+}
+
+const handleClick2 = () => {
+  loginStore.$patch({
+    name: 'waeqe',
+  })
+}
+</script>
 <style scoped lang="scss">
 a {
   color: #42b983;
